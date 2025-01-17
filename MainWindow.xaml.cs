@@ -96,6 +96,13 @@ namespace EasyNote
             }
             contextMenu.Items.Add(addItem);
 
+            if (treeViewItem != null)
+            {
+                MenuItem removeItem = new MenuItem { Header = "Remove Note" };
+                removeItem.Click += (s, e) => RemoveNote(treeViewItem);
+                contextMenu.Items.Add(removeItem);
+            }
+
             MenuItem hideItem = new MenuItem { Header = "Hide" };
             hideItem.Click += (s, e) => this.Hide();
             contextMenu.Items.Add(hideItem);
@@ -111,6 +118,11 @@ namespace EasyNote
         {
             TreeViewItem newItem = CreateTreeViewItem();
             noteBook.Items.Add(newItem);
+        }
+
+        private void RemoveNote(TreeViewItem item)
+        {
+            noteBook.Items.Remove(item);
         }
 
         private void AddDetail(TreeViewItem parentItem)
